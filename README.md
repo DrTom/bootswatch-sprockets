@@ -16,7 +16,7 @@ that uses sprockets, e.g. [Middleman][].
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bootswatch-sprockets'
+gem 'bootswatch-sprockets', "~> 0.1"
 ```
 
 And then execute:
@@ -34,25 +34,18 @@ This is an example how to use the [Slate](http://bootswatch.com/slate/)
 template:
 
 ```sass
-@import bootswatch/slate/variables.scss
+@import bootswatch/slate/variables
 
 @import bootstrap-sprockets
 @import bootstrap
 
-@import bootswatch/slate/bootswatch.scss
+@import bootswatch/slate/bootswatch
 ```
-
-**Attention!** The `.sccs` extension must be present in the `@import` directive. 
-
-See the notes below. 
-
 
 ## Internals 
 
-This gem does nothing more than packaging all the [Bootswatch][] files into
-`/assets/stylsheets/...`. These include also `less` files and anything else
-that comes with [Bootswatch][]. The `@import` from `sass` chokes when it is not
-restricted to `.scss` files.
+This gem does nothing more than packaging all the [Bootswatch][] scss
+files into `/assets/stylsheets/...`.
 
 ## Building 
 
