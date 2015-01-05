@@ -1,3 +1,0 @@
-[submodule "bootswatch"]
-	path = assets/stylesheets/bootswatch
-	url = https://github.com/thomaspark/bootswatch.git
