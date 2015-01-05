@@ -25,8 +25,35 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
 
   spec.files +=  \
-    Dir.glob("assets/**/*scss").reject do |filename|
-      filename =~ /bower_components/
+    Dir.glob("vendor/bootswatch/**/*scss").reject do |filename|
+
+      filename =~ %r{^vendor/bootswatch/bower_components}
+
+    end.map do |scss_file|
+
+      target_path = scss_file.gsub(%r{^vendor/bootswatch/}, "assets/stylesheets/bootswatch/")
+
+      FileUtils.mkdir_p(File.dirname(target_path))
+
+      lines = File.readlines(scss_file).map do |line|
+        if line =~ /^\s*\$icon-font-path/
+          "// #{line}"
+        else
+          line 
+        end
+      end.map do |line|
+        if line =~ /^\s*\$\S+:/
+          line.sub(';', ' !default;')
+        else
+          line
+        end
+      end
+
+      File.open(target_path, 'w') do |file|
+        file.write(lines.join)
+      end
+
+      target_path
     end
 
 end
